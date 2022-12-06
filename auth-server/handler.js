@@ -71,9 +71,9 @@ module.exports.getAccessToken = async (event) => {
          */
         oAuth2Client.getToken(code, (err, token) => {
             if (err) {
-                return reject(err);
+                return rej(err);
             }
-            return resolve(token);
+            return res(token);
         });
     })
         .then((token) =>
