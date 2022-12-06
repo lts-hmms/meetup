@@ -1,5 +1,4 @@
 const { google } = require('googleapis');
-const { resolve } = require('path');
 
 const { OAuth2 } = google.auth;
 const calendar = google.calendar('v3');
@@ -84,7 +83,7 @@ module.exports.getAccessToken = async (event) => {
                     "Access-Control-Allow-Origin": "*",
                   },
                 body: JSON.stringify(token),
-            }
+            };
         })
         .catch((err) => {
             console.error(err);
