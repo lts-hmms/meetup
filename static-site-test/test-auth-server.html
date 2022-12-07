@@ -72,10 +72,10 @@
         // eslint-disable-next-line prefer-template
         const getTokenRequest = getToken + "/" + code;
         fetch(getTokenRequest)
-          .then((res) => {
+          .then(function (res) {
             return res.json();
           })
-          .then((json) => {
+          .then(function (json) {
             accessTokenElement.innerText = JSON.stringify(json);
           });
       };
