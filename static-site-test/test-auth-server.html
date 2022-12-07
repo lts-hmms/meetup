@@ -31,7 +31,7 @@
         from the URI.
       </p>
       <br />
-      <label>Code input<input id="code" type="text" value="" /></label>
+      <label>Code input: <input id="code" type="text" value="" /></label>
       <button id="getToken">Get Token</button>
       <p id="accessToken"></p>
     </main>
@@ -72,7 +72,9 @@
         // eslint-disable-next-line prefer-template
         const getTokenRequest = getToken + "/" + code;
         fetch(getTokenRequest)
-          .then((res) => res.json())
+          .then((res) => {
+            return res.json();
+          })
           .then((json) => {
             accessTokenElement.innerText = JSON.stringify(json);
           });
