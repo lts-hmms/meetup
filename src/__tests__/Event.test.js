@@ -38,5 +38,12 @@ test('render details button', () => {
 test('renders collapsed state as default', () => {
     expect(EventWrapper.state('collapsed')).toBe(true);
   });
+test('change state when details-button clicked', () => {
+    EventWrapper.setState({
+        collapsed:'true'
+    });
+    EventWrapper.find('.details-btn').simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(false);
+})
 
 })
