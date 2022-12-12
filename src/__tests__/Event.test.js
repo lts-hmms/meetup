@@ -3,7 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Event from '../Event';
 import { mockData } from '../mock-data';
-import { text } from 'stream/consumers';
 
 describe('<Event /> component', () => {
     let EventWrapper;

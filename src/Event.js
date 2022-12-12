@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-
-
 class Event extends Component {
     state = { collapsed: true }
     toggleDetails = () => {
@@ -13,6 +11,7 @@ class Event extends Component {
     render(){
         const { event } = this.props;
         const { collapsed } = this.state;
+        
         return (<div className='event-overview'>
             <p className='title'>Learn JavaScript</p>
             <p className='date'>2020-05-19T16:00:00+02:00</p>
