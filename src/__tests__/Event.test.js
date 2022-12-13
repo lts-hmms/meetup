@@ -15,16 +15,13 @@ describe('<Event /> component', () => {
 * Feature 2, Scenario 1: An event element is collapsed by default
 */
 test ('render overview infos', () => {
-    expect(EventWrapper.find('.title','.date','.time','.city')).toHaveLength(1)
+    expect(EventWrapper.find('.title','.date','.city')).toHaveLength(1)
 })
 test('render correct summary as title', () => {
     expect(EventWrapper.find('.title').text()).toBe(event.summary);
 });
 test('render correct date', () => {
     expect(EventWrapper.find('.date').text()).toBe(event.start.dateTime);
-});
-test('render correct timezone', () => {
-    expect(EventWrapper.find('.time').text()).toBe(event.start.timeZone);
 });
 test('render correct place', () => {
     expect(EventWrapper.find('.place').text()).toBe(event.location);

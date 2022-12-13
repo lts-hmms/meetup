@@ -13,18 +13,16 @@ class Event extends Component {
         const { collapsed } = this.state;
         
         return (<div className='event-overview'>
-            <p className='title'>Learn JavaScript</p>
-            <p className='date'>2020-05-19T16:00:00+02:00</p>
-            <p className='time'>Europe/Berlin</p>
-            <p className='place'>London, UK</p>
+            <p className='title'>{event.summary}</p>
+            <p className='date'>{new Date(event.start.dateTime).toString()}</p>
+            <p className='place'>{event.location}</p>
             
             {!collapsed && (
                 <div className='event-details'>
-                <p className='title'>Learn JavaScript</p>
-                <p className='date'>2020-05-19T16:00:00+02:00</p>
-                <p className='time'>Europe/Berlin</p>
-                <p className='place'>London, UK</p>
-                <div className='description'>Have you wondered how you can ask Google to show you the list of the top ten must-see places in London? And how Google presents you the list? How can you submit the details of an application? Well, JavaScript is doing these. :) \n\nJavascript offers interactivity to a dull, static website. Come, learn JavaScript with us and make those beautiful websites.</div>
+                <p className='title'>{event.summary}</p>
+                <p className='date'>{new Date(event.start.dateTime).toString()}</p>
+                <p className='place'>{event.location}</p>
+                <div className='description'>{event.description}</div>
               </div >
             )}
             <button type='button' className='details-btn' onClick={() => this.toggleDetails()}>
