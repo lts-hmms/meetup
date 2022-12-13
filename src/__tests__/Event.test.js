@@ -8,7 +8,7 @@ describe('<Event /> component', () => {
     let EventWrapper;
     let event = mockData[0]
     beforeAll(() => {
-        EventWrapper = shallow(<Event/>)
+        EventWrapper = shallow(<Event event={event}/>)
     });
 
 /**
@@ -21,7 +21,7 @@ test('render correct summary as title', () => {
     expect(EventWrapper.find('.title').text()).toBe(event.summary);
 });
 test('render correct date', () => {
-    expect(EventWrapper.find('.date').text()).toBe(event.start.dateTime);
+    expect(EventWrapper.find('.date').text()).toBe(new Date(event.start.dateTime).toString());
 });
 test('render correct place', () => {
     expect(EventWrapper.find('.place').text()).toBe(event.location);
