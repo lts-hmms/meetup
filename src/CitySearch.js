@@ -2,15 +2,14 @@ import React, { Component } from "react";
 
 
 class CitySearch extends Component {
-    constructor(){
-        super();
+   
 
-        this.state = { 
+        state = { 
             query: '',
             suggestions: [],
             location: []
         }
-    }
+
     handleInputChanged = (event) => {
         const value = event.target.value;
         const suggestions = this.props.locations.filter((location) => {
