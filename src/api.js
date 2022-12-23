@@ -29,7 +29,7 @@ const removeQuery = () => {
         let newurl = window.location.protocol + '//' + window.location.host + window.location.pathname;
         window.history.pushState('','', newurl);
     } else {
-        newurl = window.location.protocol + '//' + window.location.host;
+        let newurl = window.location.protocol + '//' + window.location.host;
         window.history.pushState('','', newurl);
     }
 }
