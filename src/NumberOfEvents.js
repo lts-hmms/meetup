@@ -10,7 +10,7 @@ class NumberOfEvents extends Component {
     }
 
     render(){
-        const {numOfEvents} = this.state
+        const {numOfEvents} = this.props
         return (
         <div className="NumberOfEvents">
         <input

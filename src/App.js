@@ -9,7 +9,8 @@ import './nprogress.css';
 class App extends Component {
   state = {
     events : [],
-    locations: []
+    locations: [],
+    numOfEvents: 32,
   }
 
   componentDidMount(){
@@ -41,7 +42,7 @@ class App extends Component {
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
         <EventList events ={this.state.events}/>
-        <NumberOfEvents />
+        <NumberOfEvents numOfEvents={this.state.numOfEvents}/>
       </div>
     );
   }
