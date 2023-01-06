@@ -66,7 +66,26 @@ describe('<App /> integration', () => {
         const AppWrapper = mount(<App />);
         const AppNumOfEventsState = AppWrapper.state('numOfEvents');
         expect(AppNumOfEventsState).not.toEqual(undefined);
-        expect(AppWrapper.find(NumberOfEvents).props().numOfEvents).toEqual(AppNumOfEventsState);
+        expect(AppWrapper.find(NumberOfEvents).props().num).toEqual(AppNumOfEventsState);
         AppWrapper.unmount();
-})
+    })
+    test('get number of events matching the number in input "EventsNumber"', async () => {
+        const AppWrapper = mount(<App />);
+        const NumOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+        NumOfEventsWrapper.find('.EventsNumber').simulate('change', { target: {value:10}
+        });
+        await getEvents();
+        expect (AppWrapper.state('numOfEvents')).toBe(10);
+        AppWrapper.unmount();
+    })
+    test('rendered events match the content of mock API', async () => {
+        const AppWrapper = mount(<App />);
+        const NumOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+        NumOfEventsWrapper.find('.EventsNumber').simulate('change', {
+          target: { value: 1 }
+        });
+        await getEvents();
+        expect(AppWrapper.state('events')).toEqual(mockData.slice(0, 1));
+        AppWrapper.unmount();
+      });
 })
