@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Event from '../Event';
 import { mockData } from '../mock-data';
+import moment from 'moment/moment';
 
 describe('<Event /> component', () => {
     let EventWrapper;
@@ -21,7 +22,7 @@ test('render correct summary as title', () => {
     expect(EventWrapper.find('.title').text()).toBe(event.summary);
 });
 test('render correct date', () => {
-    expect(EventWrapper.find('.date').text()).toBe(new Date(event.start.dateTime).toString());
+    expect(EventWrapper.find('.date').text()).toBe(moment(event.start.dateTime).format('MMMM Do YYYY, h:mm a'));
 });
 test('render correct place', () => {
     expect(EventWrapper.find('.place').text()).toBe(event.location);
