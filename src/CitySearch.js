@@ -59,7 +59,6 @@ class CitySearch extends Component {
                     placeholder="Search for a city"
                     onChange={this.handleInputChanged}
                     onFocus={this.handleFocus}
-                    onBlur={() => {this.setState({ showSuggestions: false})}}
                     />
              </label>
                 <ul className="suggestions text-left cursor-pointer text-xl sm:text-2xl bg-white py-2 px-3 rounded-b-lg shadow-md" style={this.state.showSuggestions ? {}: { display:'none'}}>
