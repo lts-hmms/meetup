@@ -60,7 +60,7 @@ class App extends Component {
             Discover great events in your favorite city!
           </p>
           </section>
-          <section className='search mb-6 p-6 flex flex-col justify-center sm:text-xl sm:flex-row gap-5 '>
+          <section className='search mb-6 p-6 flex flex-col items-center justify-center sm:text-xl sm:flex-row gap-5 '>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
         
         <NumberOfEvents num={this.state.numOfEvents} updateNumOfEvents={(num) =>
