@@ -46,7 +46,7 @@ class App extends Component {
   
   render(){
     return (
-      <div className="App bg-orange-50">
+      <div className="App">
         <div className="max-w-5xl mx-auto">
           <section className=' my-12 p-6 flex flex-col items-center justify-center gap-8'>
           <h2
