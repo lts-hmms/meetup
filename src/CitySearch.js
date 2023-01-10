@@ -31,7 +31,8 @@ class CitySearch extends Component {
     }
     
     handleFocus = (event) => {
-        const value = event.target.value
+        let value = event.target.value;
+        value='';
         this.setState({
             showSuggestions: true
         })
