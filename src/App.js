@@ -66,7 +66,7 @@ class App extends Component {
                 this.updateNumOfEvents(num)}
             />
           </section>
-          <section className='p-6 block items-center justify-center'>
+          <section className='p-6 items-center justify-center'>
             <EventList events ={this.state.events} />
           </section>
         </div>
