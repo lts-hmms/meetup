@@ -67,7 +67,7 @@ class App extends Component {
               this.updateNumOfEvents(num)}
           />
           </section>
-          <section className='my-12 p-6 flex items-center justify-center gap-8 sm:flex-row'>
+          <section className='my-12 p-6 flex items-center justify-center gap-8 sm:flex-col'>
           <EventList events ={this.state.events} />
           </section>
           </div>
