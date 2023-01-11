@@ -22,7 +22,7 @@ class Event extends Component {
                 <div className='description'>{event.description}</div>
               </div >
             )}
-            <button type='button' className='details-btn mt-6 text-lg sm:text-xl hover:bg-purple-400 active:bg-purple-500 text-black p-3 w-48 rounded-xl border border-solid border-slate-900' onClick={() => this.toggleDetails()}>
+            <button type='button' className='details-btn mt-6 text-lg sm:text-xl hover:bg-purple-400 active:bg-purple-500 text-black p-3 rounded-xl border border-solid border-slate-900' onClick={() => this.toggleDetails()}>
                     {collapsed ? 'Show details' : 'Hide details'}
             </button>
 
