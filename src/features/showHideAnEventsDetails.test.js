@@ -7,7 +7,6 @@ const feature = loadFeature('./src/features/showHideAnEventsDetails.feature')
 
 defineFeature(feature, test => {
     let AppWrapper;
-
     test('An event element is collapsed by default', ({ given, when, then }) => {
     	given('a list of all upcoming events', () => {
             AppWrapper = mount(<App/>);

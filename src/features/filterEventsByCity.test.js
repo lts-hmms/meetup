@@ -9,10 +9,10 @@ import CitySearch from '../CitySearch';
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
 defineFeature(feature, test => {
+        let AppWrapper;
     test('When user has not searched for a city, show upcoming events from all cities.', ({ given, when, then }) => {
     	given('user has not searched for any city', () => {
     	});
-        let AppWrapper;
     	when('the user opens the app', () => {
             AppWrapper = mount(<App />);
     	});
@@ -37,7 +37,6 @@ defineFeature(feature, test => {
     });
 
     test('User can select a city from the suggested list.', ({ given, and, when, then }) => {
-        let AppWrapper;
     	given('user was typing “Berlin” in the city textbox', async () => {
             AppWrapper = await mount (<App />);
             AppWrapper.find('.city').simulate('change', {
@@ -59,8 +58,4 @@ defineFeature(feature, test => {
             expect(AppWrapper.find('.event')).toHaveLength(mockData.length)
     	});
     });
-
-
-
-
 });
