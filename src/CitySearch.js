@@ -2,16 +2,12 @@ import React, { Component } from "react";
 
 
 class CitySearch extends Component {
-    constructor(){
-        super();
-        
-        this.state = { 
-            query: '',
-            suggestions: [],
-            showSuggestions: undefined
-        }
-        
+    state = { 
+        query: '',
+        suggestions: [],
+        showSuggestions: undefined
     }
+
     handleInputChanged = (event) => {
         const value = event.target.value;
         const suggestions = this.props.locations.filter((location) => {
@@ -46,7 +42,7 @@ class CitySearch extends Component {
     }
    
     render(){
-        const { locations } = this.props
+        // const { locations } = this.props
 
         return (
             <div className="CitySearch">
