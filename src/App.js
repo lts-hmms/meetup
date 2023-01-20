@@ -27,6 +27,10 @@ class App extends Component {
     this.setState({
       numOfEvents: num,
     })
+    getEvents().then((events) => {
+      this.setState({events: events.slice(0, this.state.numOfEvents)})
+      
+    })
   }
 
   componentDidMount(){
@@ -61,10 +65,10 @@ class App extends Component {
           </p>
           </section>
           <section className='search p-6 flex flex-col items-center justify-center sm:text-xl sm:flex-row gap-5 '>
-            <CitySearch locations={this.state.locations} updateCityEvents={this.updateCityEvents}/>
             <NumberOfEvents num={this.state.numOfEvents} updateNumOfEvents={(num) =>
                 this.updateNumOfEvents(num)}
             />
+            <CitySearch locations={this.state.locations} updateCityEvents={this.updateCityEvents}/>
           </section>
           <section className='p-6 items-center justify-center'>
             <EventList events ={this.state.events} />
