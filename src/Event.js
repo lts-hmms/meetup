@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import moment from "moment/moment";
 
 class Event extends Component {
-    state = { collapsed: true }
+    state = { 
+        collapsed: true 
+    }
+
     toggleDetails = () => {
         this.setState((prevState) => ({
             collapsed: !prevState.collapsed, 

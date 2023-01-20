@@ -13,7 +13,7 @@ class App extends Component {
     numOfEvents: 32,
   }
 
-  updateEvents = (location, eventCount) => {
+  updateCityEvents = (location) => {
     getEvents().then((events) => {
       const locationEvents = location === 'all cities' ? 
       events : events.filter((event) => event.location === location);
@@ -25,7 +25,7 @@ class App extends Component {
 
   updateNumOfEvents(num) {
     this.setState({
-      numOfEvents: num
+      numOfEvents: num,
     })
   }
 
@@ -61,7 +61,7 @@ class App extends Component {
           </p>
           </section>
           <section className='search p-6 flex flex-col items-center justify-center sm:text-xl sm:flex-row gap-5 '>
-            <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
+            <CitySearch locations={this.state.locations} updateCityEvents={this.updateCityEvents}/>
             <NumberOfEvents num={this.state.numOfEvents} updateNumOfEvents={(num) =>
                 this.updateNumOfEvents(num)}
             />
