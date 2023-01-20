@@ -26,7 +26,7 @@ defineFeature(feature, test => {
         let CitySearchWrapper;
         const locations = extractLocations(mockData)
     	given('main page is open', () => {
-            CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}} locations={locations} />);
+            CitySearchWrapper = shallow(<CitySearch updateCityEvents={() => {}} locations={locations} />);
     	});
     	when('user starts typing in the city textbox', () => {
             CitySearchWrapper.find('.city').simulate('change', {target: {value: 'Berlin'} });

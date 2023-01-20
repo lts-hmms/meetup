@@ -8,6 +8,7 @@ class CitySearch extends Component {
         showSuggestions: undefined
     }
 
+
     handleInputChanged = (event) => {
         const value = event.target.value;
         const suggestions = this.props.locations.filter((location) => {
@@ -23,27 +24,21 @@ class CitySearch extends Component {
             query: suggestion,
             showSuggestions: false
         });
-        this.props.updateEvents(suggestion);
+        this.props.updateCityEvents(suggestion);
     }
     
     handleFocus = (event) => {
-        let value = event.target.value;
-        value='';
         this.setState({
             showSuggestions: true
         })
-        if (!value || value === 'all cities') {
+        if (!this.query) {
             this.setState({
-                suggestions: this.props.locations
+                suggestions: this.props.locations,
             })
-        } else {
-            this.handleInputChanged(event)
         }
     }
    
     render(){
-        // const { locations } = this.props
-
         return (
             <div className="CitySearch">
             <label> 
@@ -54,7 +49,7 @@ class CitySearch extends Component {
                     className="city max-w-4xl text-black text-xl sm:text-2xl p-3 rounded-t-lg focus:border-2 focus:border-purple-400 focus:outline-none shadow-md"
                     value={this.state.query}
                     placeholder="Search for a city"
-                    onChange={this.handleInputChanged}
+                    onChange={this.handleInputChange}
                     onFocus={this.handleFocus}
                     />
              </label>

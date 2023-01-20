@@ -11,7 +11,7 @@ class NumberOfEvents extends Component {
     }
 
     componentDidMount(){
-        this.setState({ num: this.props.num || 32});
+        this.setState({ num: this.props.num});
     }
    
     render(){
@@ -27,5 +27,9 @@ class NumberOfEvents extends Component {
         )   
     }
 }
+
+NumberOfEvents.defaultProps = {
+    num: 32
+};
 
 export default NumberOfEvents;
