@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import moment from "moment/moment";
 
 class Event extends Component {
-    state = { collapsed: true }
+    state = { 
+        collapsed: true 
+    }
+
     toggleDetails = () => {
         this.setState((prevState) => ({
             collapsed: !prevState.collapsed, 
@@ -12,22 +16,16 @@ class Event extends Component {
         const { event } = this.props;
         const { collapsed } = this.state;
         
-        return (<div className='event-overview'>
-            <p className='title'>Learn JavaScript</p>
-            <p className='date'>2020-05-19T16:00:00+02:00</p>
-            <p className='time'>Europe/Berlin</p>
-            <p className='place'>London, UK</p>
-            
+        return (<div className='event event-overview bg-white text-center p-8 shadow-[10px_10px_5px_0px_rgba(192,132,252)] '>
+            <h2 className='title mb-2 text-xl sm:text-2xl font-semibold'>{event.summary}</h2>
+            <p className='date text-lg sm:text-xl'>{moment(event.start.dateTime).format('MMM Do YYYY, h:mm a')}</p>
+            <p className='place text-lg sm:text-xl'>{event.location}</p>
             {!collapsed && (
-                <div className='event-details'>
-                <p className='title'>Learn JavaScript</p>
-                <p className='date'>2020-05-19T16:00:00+02:00</p>
-                <p className='time'>Europe/Berlin</p>
-                <p className='place'>London, UK</p>
-                <div className='description'>Have you wondered how you can ask Google to show you the list of the top ten must-see places in London? And how Google presents you the list? How can you submit the details of an application? Well, JavaScript is doing these. :) \n\nJavascript offers interactivity to a dull, static website. Come, learn JavaScript with us and make those beautiful websites.</div>
+                <div className='event-details mt-6 text-lg sm:text-xl'>
+                <div className='description'>{event.description}</div>
               </div >
             )}
-            <button type='button' className='details-btn' onClick={() => this.toggleDetails()}>
+            <button type='button' className='details-btn mt-6 text-lg sm:text-xl hover:bg-purple-400 active:bg-purple-500 text-black p-3 rounded-xl border border-solid border-slate-900' onClick={() => this.toggleDetails()}>
                     {collapsed ? 'Show details' : 'Hide details'}
             </button>
 
