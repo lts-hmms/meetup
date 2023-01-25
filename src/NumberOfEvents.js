@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { ErrorAlert } from "./Alert";
 
 class NumberOfEvents extends Component {
     state = {
@@ -6,8 +7,18 @@ class NumberOfEvents extends Component {
     }
   
     handleNumChange(value) {
-        this.setState({ num: value});
+        if(value < 1 | value > 32 || value % 1 !== 0){
+        this.setState({ 
+            num: value,
+            errorText: 'Please enter a number between 1 and 32.'
+        });
+    } else {
+        this.setState({ 
+            num: value,
+            errorText: ''
+        });
         this.props.updateNumOfEvents(value);
+    }
     }
 
     componentDidMount(){
@@ -18,6 +29,7 @@ class NumberOfEvents extends Component {
         const {num} = this.state
         return (
         <div className="NumberOfEvents text-xl sm:text-2xl">
+            <ErrorAlert text={this.state.errorText} />
                 Events you want to see: 
                 <input type="number" className="EventsNumber ml-3 max-w-4xl text-black p-3 rounded-full focus:border-2 focus:border-purple-400 focus:outline-none shadow-md" min={1} max={32} value={num}
                     onChange={(event) => this.handleNumChange(event.target.value)
