@@ -8,7 +8,7 @@ class Alert extends Component {
 
     getStyle = () => {
         return {
-            color: this.color,
+            color: this.color
         };
     }
 

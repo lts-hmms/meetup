@@ -43,7 +43,7 @@ class CitySearch extends Component {
         })
         if (!this.query) {
             this.setState({
-                suggestions: this.props.locations,
+                suggestions: this.props.locations
             })
         }
     }
@@ -55,14 +55,14 @@ class CitySearch extends Component {
             <label> 
                 <input
                     type="text"
-                    className="city max-w-4xl text-black text-xl sm:text-2xl p-3 rounded-t-lg focus:border-2 focus:border-purple-400 focus:outline-none shadow-md"
+                    className="city relative max-w-4xl text-black text-xl sm:text-2xl p-3 rounded-t-lg focus:border-2 focus:border-purple-400 focus:outline-none shadow-md"
                     value={this.state.query}
                     placeholder="Search for a city"
                     onChange={this.handleInputChange}
                     onFocus={this.handleFocus}
                     />
              </label>
-                <ul className="suggestions text-left cursor-pointer text-xl sm:text-2xl bg-white py-2 px-3 rounded-b-lg shadow-md" style={this.state.showSuggestions ? {}: { display:'none'}}>
+                <ul className="suggestions absolute text-left cursor-pointer text-xl sm:text-2xl bg-white py-2 px-3 rounded-b-lg shadow-md" style={this.state.showSuggestions ? {}: { display:'none'}}>
                     {this.state.suggestions.map((suggestion) => (
                         <li key={suggestion} onClick={() => this.handleItemClicked(suggestion) && this.setState({ showSuggestions: false })}>{suggestion}</li>
                     ))}
