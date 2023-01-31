@@ -3,10 +3,10 @@ import Event from "./Event";
 
 class EventList extends Component {
     render(){
-        const { events } = this.props;
+        const { events, numOfEvents } = this.props;
         return (
             <ul className='EventList list-none mx-auto my-12 grid sm:grid-cols-2 lg:auto-cols-max items-start justify-center gap-8'>
-                {events.map(event => 
+                {(numOfEvents ? events.slice(0, numOfEvents) : events).map(event => 
                     <li key={event.id}>
                        <Event event={event} /> 
                     </li>
