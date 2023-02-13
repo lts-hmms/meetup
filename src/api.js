@@ -38,7 +38,7 @@ const getToken = async (code) => {
     try {
         const encodeCode = encodeURIComponent(code);
         const response = await fetch(
-            'https://m2mnls580k.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+            `https://m2mnls580k.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
         )
         if (!response.ok){
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -86,6 +86,7 @@ export const getEvents = async() => {
 export const getAccessToken = async () => {
     const accessToken = localStorage.getItem('access_token');
     const tokenCheck = accessToken && (await checkToken(accessToken));
+    
     if (!accessToken || tokenCheck.error) {
         await localStorage.removeItem('access_token');
         const searchParams = new URLSearchParams(window.location.search);
