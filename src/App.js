@@ -3,15 +3,18 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import WelcomeScreen from './WelcomeScreen';
 import { ErrorAlert } from './Alert';
-import { extractLocations, getEvents } from './api';
+import { extractLocations, getEvents, checkToken, getAccessToken  } from './api';
 import './nprogress.css';
+import { is } from 'immer/dist/internal';
 
 class App extends Component {
   state = {
     events : [],
     locations: [],
     numOfEvents: 32,
+    showWelcomeScreen: undefined
   }
 
   updateCityEvents = (location) => {
@@ -44,13 +47,26 @@ class App extends Component {
     });
   }
 
-  componentWillUnmount(){
-    this.mounted = false;
+  async componentWillUnmount(){
+    this.mounted = true;
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParam = new URLSearchParams(window.location.search);
+    const code = searchParam.get('code');
+    this.setState({ showWelcomeScreen: !(code || isTokenValid )});
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if(this.mounted) {
+          this.setState({ events, locations: extractLocations(events)});
+        }
+      });
+    }
   }
   
   render(){
-    const { events, numOfEvents, locations} = this.state;
+    const { events, numOfEvents, locations, showWelcomeScreen} = this.state;
     const warningMessage = navigator.onLine ? "" : "App is running in offline mode, events are may not be up to date.";
+    if( this.state.showWelcomeScreen === undefined) return <div className='App' />
 
     return (
       <div className="App">
@@ -78,6 +94,9 @@ class App extends Component {
             <EventList events ={events} numOfEvents={numOfEvents}/>
           </div>
         </div>
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+                getAccessToken={() => { getAccessToken() }} 
+          />
       </div>
     );
   }
