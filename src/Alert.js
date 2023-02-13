@@ -21,11 +21,9 @@ class Alert extends Component {
     }
 }
 
-class ErrorAlert extends Alert {
+export class ErrorAlert extends Alert {
     constructor (props) {
         super(props);
         this.color ='coral';
     }
 }
-
-export ErrorAlert;
