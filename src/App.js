@@ -3,6 +3,7 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { ErrorAlert } from './Alert';
 import { extractLocations, getEvents } from './api';
 import './nprogress.css';
 
@@ -49,6 +50,7 @@ class App extends Component {
   
   render(){
     const { events, numOfEvents, locations} = this.state;
+    const warningMessage = navigator.onLine ? "" : "App is running in offline mode, events are may not be up to date.";
 
     return (
       <div className="App">
@@ -66,6 +68,7 @@ class App extends Component {
           </p>
           </div>
           <div className='search p-6 flex flex-col items-center justify-center sm:text-xl sm:flex-row gap-5 '>
+          <ErrorAlert message={warningMessage} />
             <NumberOfEvents num={numOfEvents} updateNumOfEvents={(num) =>
                 this.updateNumOfEvents(num)}
             />
