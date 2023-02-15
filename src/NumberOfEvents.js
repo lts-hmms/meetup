@@ -30,11 +30,13 @@ class NumberOfEvents extends Component {
         return (
         <div className="NumberOfEvents text-xl sm:text-2xl">
             <ErrorAlert text={this.state.errorText} />
+            <label>
                 Events you want to see: 
                 <input type="number" className="EventsNumber ml-3 max-w-4xl text-black p-3 rounded-full focus:border-2 focus:border-purple-400 focus:outline-none shadow-md" min={1} max={32} value={num}
                     onChange={(event) => this.handleNumChange(event.target.value)
                     }
                 />
+            </label>
     </div>
         )   
     }

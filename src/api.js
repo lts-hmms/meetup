@@ -15,7 +15,7 @@ export const extractLocations = (events) => {
     return locations;
 }
 
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
     const result = await fetch(
         `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
     )
@@ -34,11 +34,12 @@ const removeQuery = () => {
     }
 }
 
+// token goes to local storage
 const getToken = async (code) => {
     try {
         const encodeCode = encodeURIComponent(code);
         const response = await fetch(
-            'https://m2mnls580k.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+            `https://m2mnls580k.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
         )
         if (!response.ok){
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -55,15 +56,22 @@ const getToken = async (code) => {
 export const getEvents = async() => {
     NProgress.start();
 
+    // use mockdata when running locally
     if (window.location.href.startsWith('http://localhost')) {
         NProgress.done();
         return mockData
     }
+    // get events from local storage when offline
+    if (!navigator.onLine) {
+        const data = localStorage.getItem("lastEvents");
+        NProgress.done();
+        return data ? JSON.parse(data) : [];
+      }
     const token = await getAccessToken();
 
     if(token){
         removeQuery();
-        const url = 'https://m2mnls580k.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
+        const url = `https://m2mnls580k.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
         const result = await axios.get(url);
         if (result.data) {
             let locations = extractLocations(result.data.events);
@@ -78,6 +86,7 @@ export const getEvents = async() => {
 export const getAccessToken = async () => {
     const accessToken = localStorage.getItem('access_token');
     const tokenCheck = accessToken && (await checkToken(accessToken));
+
     if (!accessToken || tokenCheck.error) {
         await localStorage.removeItem('access_token');
         const searchParams = new URLSearchParams(window.location.search);

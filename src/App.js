@@ -3,7 +3,9 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { extractLocations, getEvents } from './api';
+import WelcomeScreen from './WelcomeScreen';
+import { ErrorAlert } from './Alert';
+import { extractLocations, getEvents, checkToken, getAccessToken  } from './api';
 import './nprogress.css';
 
 class App extends Component {
@@ -11,6 +13,7 @@ class App extends Component {
     events : [],
     locations: [],
     numOfEvents: 32,
+    showWelcomeScreen: undefined
   }
 
   updateCityEvents = (location) => {
@@ -31,16 +34,23 @@ class App extends Component {
     })
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-      this.setState({ 
-        events: events,
-        locations: extractLocations(events)
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ 
+            events: events,
+            locations: extractLocations(events)
+          });
+        } 
       });
     }
-    });
   }
 
   componentWillUnmount(){
@@ -48,7 +58,9 @@ class App extends Component {
   }
   
   render(){
-    const { events, numOfEvents, locations} = this.state;
+    const { events, numOfEvents, locations, showWelcomeScreen} = this.state;
+    const warningMessage = navigator.onLine ? "" : "App is running in offline mode, events are may not be up to date.";
+    if( showWelcomeScreen === undefined) return <div className='App' />
 
     return (
       <div className="App">
@@ -66,6 +78,7 @@ class App extends Component {
           </p>
           </div>
           <div className='search p-6 flex flex-col items-center justify-center sm:text-xl sm:flex-row gap-5 '>
+          <ErrorAlert message={warningMessage} />
             <NumberOfEvents num={numOfEvents} updateNumOfEvents={(num) =>
                 this.updateNumOfEvents(num)}
             />
@@ -75,6 +88,9 @@ class App extends Component {
             <EventList events ={events} numOfEvents={numOfEvents}/>
           </div>
         </div>
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+                getAccessToken={() => { getAccessToken() }} 
+          />
       </div>
     );
   }

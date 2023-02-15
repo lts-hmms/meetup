@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InfoAlert } from "./Alert";
+import { ErrorAlert } from "./Alert";
 
 
 class CitySearch extends Component {
@@ -51,7 +51,7 @@ class CitySearch extends Component {
     render(){
         return (
             <div className="CitySearch">
-                <InfoAlert text={this.state.infoText} />
+                <ErrorAlert text={this.state.infoText} />
             <label> 
                 <input
                     type="text"
