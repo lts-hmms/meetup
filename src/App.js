@@ -4,8 +4,10 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import WelcomeScreen from './WelcomeScreen';
+import { EventGenre } from './eventGenre';
 import { ErrorAlert } from './Alert';
 import { extractLocations, getEvents, checkToken, getAccessToken  } from './api';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './nprogress.css';
 
 class App extends Component {
@@ -14,6 +16,16 @@ class App extends Component {
     locations: [],
     numOfEvents: 32,
     showWelcomeScreen: undefined
+  }
+
+  getData = () => {
+    const {locations, events} = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return {city, number}
+    })
+    return data;
   }
 
   updateCityEvents = (location) => {
@@ -83,6 +95,26 @@ class App extends Component {
                 this.updateNumOfEvents(num)}
             />
             <CitySearch locations={locations} updateCityEvents={this.updateCityEvents}/>
+          </div>
+          <div className='data-vis-wrapper'>
+            <EventGenre events={events} />
+            <ResponsiveContainer height={400} >
+              <ScatterChart
+                margin={{
+                  top: 20,
+                  right: 20,
+                  bottom: 10,
+                  left: 10,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="city" type="category" name="city" />
+                <YAxis dataKey="number" type="number" name="number of events" />
+                {/* <ZAxis dataKey="z" type="number" range={[64, 144]} name="score" unit="km" /> */}
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={this.getData()} fill="#a855f7" />
+              </ScatterChart>
+            </ResponsiveContainer>
           </div>
           <div className='p-6 items-center justify-center'>
             <EventList events ={events} numOfEvents={numOfEvents}/>
