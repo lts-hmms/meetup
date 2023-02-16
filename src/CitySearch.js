@@ -51,18 +51,17 @@ class CitySearch extends Component {
     render(){
         return (
             <div className="CitySearch">
-                <ErrorAlert text={this.state.infoText} />
-            <label> 
-                <input
-                    type="text"
-                    className="city relative max-w-4xl text-black text-xl sm:text-2xl p-3 rounded-t-lg focus:border-2 focus:border-purple-400 focus:outline-none shadow-md"
-                    value={this.state.query}
-                    placeholder="Search for a city"
-                    onChange={this.handleInputChange}
-                    onFocus={this.handleFocus}
-                    />
-             </label>
-                <ul className="suggestions bg-white py-2 px-3 text-xl sm:text-2xl text-left rounded-b-lg shadow-md" style={this.state.showSuggestions ? {}: { display:'none'}}>
+                <label> 
+                    <input
+                        type="text"
+                        className="city text-black text-xl sm:text-2xl p-3 rounded-t-lg focus:border-2 focus:border-purple-400 focus:outline-none shadow-md"
+                        value={this.state.query}
+                        placeholder="Search for a city"
+                        onChange={this.handleInputChange}
+                        onFocus={this.handleFocus}
+                        />
+                </label>
+                <ul className="suggestions bg-white py-2 px-3 text-xl sm:text-2xl text-left rounded-b-lg shadow-md max-h-52 overflow-auto" style={this.state.showSuggestions ? {}: { display:'none'}}>
                     <div className="text-right">
                         <button type="button" className= "bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 " 
                         onClick={() => { this.setState({showSuggestions: false })}}>
@@ -71,6 +70,7 @@ class CitySearch extends Component {
                             </svg>
                         </button>
                     </div>
+                    <ErrorAlert text={this.state.infoText} />
                     {this.state.suggestions.map((suggestion) => (
                         <li className="cursor-pointer" key={suggestion} onClick={() => this.handleItemClicked(suggestion) && this.setState({ showSuggestions: false })}>{suggestion}</li>
                     ))}
