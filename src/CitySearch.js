@@ -62,11 +62,19 @@ class CitySearch extends Component {
                     onFocus={this.handleFocus}
                     />
              </label>
-                <ul className="suggestions absolute text-left cursor-pointer text-xl sm:text-2xl bg-white py-2 px-3 rounded-b-lg shadow-md" style={this.state.showSuggestions ? {}: { display:'none'}}>
+                <ul className="suggestions bg-white py-2 px-3 text-xl sm:text-2xl text-left rounded-b-lg shadow-md" style={this.state.showSuggestions ? {}: { display:'none'}}>
+                    <div className="text-right">
+                        <button type="button" className= "bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 " 
+                        onClick={() => { this.setState({showSuggestions: false })}}>
+                            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                     {this.state.suggestions.map((suggestion) => (
-                        <li key={suggestion} onClick={() => this.handleItemClicked(suggestion) && this.setState({ showSuggestions: false })}>{suggestion}</li>
+                        <li className="cursor-pointer" key={suggestion} onClick={() => this.handleItemClicked(suggestion) && this.setState({ showSuggestions: false })}>{suggestion}</li>
                     ))}
-                    <li key='all' onClick={() => this.handleItemClicked('all cities')}>
+                    <li className="cursor-pointer" key='all' onClick={() => this.handleItemClicked('all cities')}>
                         <b>See all cities</b>
                     </li>
                 </ul>
