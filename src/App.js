@@ -52,8 +52,11 @@ class App extends Component {
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
-    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    if ((code || isTokenValid) && this.mounted) {
+    const authorized = (code || isTokenValid);
+    const isLocal = (window.location.href.indexOf('localhost') > -1) ? true : false;
+    this.setState({ showWelcomeScreen: (!authorized && !isLocal) });
+    
+    if ((authorized || isLocal) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ 
@@ -72,7 +75,7 @@ class App extends Component {
   render(){
     const { events, numOfEvents, locations, showWelcomeScreen} = this.state;
     const warningMessage = navigator.onLine ? "" : "App is running in offline mode, events are may not be up to date.";
-    if( showWelcomeScreen === undefined) return <div className='App' />
+    if( showWelcomeScreen === undefined) return <div className='App' />;
 
     return (
       <div className="App">
@@ -120,7 +123,7 @@ class App extends Component {
             <EventList events ={events} numOfEvents={numOfEvents}/>
           </div>
         </div>
-          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+          <WelcomeScreen showWelcomeScreen={showWelcomeScreen}
                 getAccessToken={() => { getAccessToken() }} 
           />
       </div>
