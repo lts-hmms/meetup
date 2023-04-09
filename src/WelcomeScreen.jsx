@@ -1,5 +1,4 @@
 import React from "react";
-import './WelcomeScreen.css';
 
 function WelcomeScreen(props) {
     return props.showWelcomeScreen ?
@@ -13,7 +12,7 @@ function WelcomeScreen(props) {
                         className="btn"
                     >
                         <img
-                        className="google-icon w-8 items-center"
+                        className="google-icon w-8 flex items-center justify-center"
                         src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
                         alt="Google sign-in"
                         />
