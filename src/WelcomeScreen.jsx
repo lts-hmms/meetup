@@ -12,7 +12,7 @@ function WelcomeScreen(props) {
                         className="btn flex items-center justify-center"
                     >
                         <img
-                        className="google-icon w-8 p-2"
+                        className="google-icon w-9 p-2"
                         src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
                         alt="Google sign-in"
                         />
