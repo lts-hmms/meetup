@@ -3,10 +3,10 @@ import React from "react";
 function WelcomeScreen(props) {
     return props.showWelcomeScreen ?
     (
-        <div className="WelcomeScreen fixed w-10/12 top-0 min-h-screen flex items-center text-center flex-col py-10 gap-6 bg-orange-50">
+        <div className="WelcomeScreen fixed mx-3 top-0 min-h-screen flex items-center text-center flex-col py-10 gap-6 bg-orange-50">
             <img
             className="meetupLogo"
-            src="/meetUp-app-192.png"
+            src="./meetUp-app-192.png"
             alt="App Logo"/>
             
             <h1 className="text-3xl sm:text-4xl text-purple-500 mt-36">Welcome to the MeetUp app</h1>
