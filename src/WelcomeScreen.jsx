@@ -3,7 +3,8 @@ import React from "react";
 function WelcomeScreen(props) {
     return props.showWelcomeScreen ?
     (
-        <div className="WelcomeScreen fixed mx-20 top-0 min-h-screen flex items-center text-center flex-col py-10 gap-6 bg-orange-50">
+        <div className="WelcomeScreen fixed w-max top-0 min-h-screen flex items-center text-center flex-col py-10 gap-6 bg-orange-50">
+            <div className="container mx-20">
             <img
             className="meetupLogo"
             src="./meetup_logo.png"
@@ -27,6 +28,7 @@ function WelcomeScreen(props) {
             <a href="https://lts-hmms.github.io/meetup/privacy.html" rel="nofollow noopener">
                 Privacy policy
             </a>
+        </div>
         </div>
     ) 
     : null
