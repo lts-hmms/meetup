@@ -6,7 +6,7 @@ function WelcomeScreen(props) {
         <div className="WelcomeScreen fixed w-full top-0 min-h-screen flex items-center text-center flex-col py-10 gap-6 bg-orange-50">
             <img
             className="meetupLogo"
-            src="../public/google900557fa0093f4ee.html"
+            src="../public/meetUp-app-512.png"
             alt="app Logo"/>
             
             <h1 className="text-3xl sm:text-4xl text-purple-500 mt-36">Welcome to the MeetUp app</h1>
