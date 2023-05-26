@@ -4,7 +4,7 @@ function WelcomeScreen(props) {
     return props.showWelcomeScreen ?
     (
         <div className="WelcomeScreen fixed w-max top-0 min-h-screen items-center text-center py-10 bg-orange-50">
-            <div className="container mx-20 flex flex-col gap-6 items-center">
+            <div className="container mx-20 w-max flex flex-col gap-6 items-center">
                 <img
                 className="meetupLogo"
                 src="./meetup_logo.png"
